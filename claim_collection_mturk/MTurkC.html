@@ -269,6 +269,7 @@ $(function(){
 
   function clear_drop_down_btn(utterances_length){
     for (let i=0; i<utterances_length; i++){
+      $('#reference_'+i).prop('required',false);
       $('select#reference_'+i+' option').remove();
       $('#reference_'+i).append($('<option disabled selected value>').html(' -- select an ID -- '));
     };

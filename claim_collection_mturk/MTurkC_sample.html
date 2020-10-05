@@ -212,7 +212,7 @@ $(document).ready(function() {
           '</button>' +
         '</td>' +
         '<td>' +
-          '<select id="reference_'+index+'" name="restatement source('+index+')" style="width:100%; display:none;" required>' +
+          '<select id="reference_'+index+'" name="restatement source('+index+')" style="width:100%; display:none;">' +
             '<option disabled selected value> -- select an ID -- </option>' +
           '</select>' +
         '</td>' +
@@ -287,6 +287,7 @@ $(document).ready(function() {
 
   function clear_drop_down_btn(utterances_length){
     for (let i=0; i<utterances_length; i++){
+      $('#reference_'+i).prop('required',false);
       $('select#reference_'+i+' option').remove();
       $('#reference_'+i).append($('<option disabled selected value>').html(' -- select an ID -- '));
     };
