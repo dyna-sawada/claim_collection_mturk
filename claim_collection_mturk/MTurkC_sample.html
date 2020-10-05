@@ -301,6 +301,8 @@ $(document).ready(function() {
         clear_selected_state(index, element);
         $(element).addClass('btn-sentence-claim-value');
         remove_utterance_from_all_text_area(utterance_id);
+        clear_drop_down_btn(utterances_length);
+        $('#reference_'+index).hide();
         add_utterance_id('claim-value');
       };
     });
@@ -314,6 +316,8 @@ $(document).ready(function() {
         clear_selected_state(index, element);
         $(element).addClass('btn-sentence-claim-fact');
         remove_utterance_from_all_text_area(utterance_id);
+        clear_drop_down_btn(utterances_length);
+        $('#reference_'+index).hide();
         add_utterance_id('claim-fact');
       };
     });
@@ -327,6 +331,8 @@ $(document).ready(function() {
         clear_selected_state(index, element);
         $(element).addClass('btn-sentence-claim-policy');
         remove_utterance_from_all_text_area(utterance_id);
+        clear_drop_down_btn(utterances_length);
+        $('#reference_'+index).hide();
         add_utterance_id('claim-policy');
       };
     });
