@@ -1,0 +1,393 @@
+<!-- You must include this JavaScript file -->
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+<head>
+  <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+  <meta charset="utf-8">
+  <!-- meta_name_viewport : スマホ対応 幅から計算 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<crowd-form answer-format="flatten-objects">
+  <div class="container-fluid">
+    <div>
+      <h3><strong>Overview:</strong></h3>
+      <p>Thank you for choosing to do our task! With your help, artificial intelligence will become more intelligent in the future.</p>
+      <p>In this task, we would like you to annotate claims in the rebuttal speech.</p>
+      <p>There are 3 steps to do this task.</p>
+      <ol type="1">
+        <li>Read the constructive speech which stands for topic.</li>
+        <li>Read the rebuttal speech.</li>
+        <li>Identify claims and annotate claim types in the rebuttal speech.</li>
+      </ol>
+
+      <h3><strong>Details:</strong></h3>
+      <h4> What is claim? </h4>
+      <p>Definition of claim is <span style="text-decoration: underline">controversial statement that should not be accepted by readers without additional support</span>.</p>
+      <ul>
+        <li>Argument annotations are done sentence by sentence.</li>
+        <li>If there is a sentence that only denies the opponent's claim, the sentence states the reason for the denial is also included in a claim.</li>
+        <ul>
+          <li>E.g.: "However, it's not true. Beacause the students will be more foolish by abolishing homework."</li>
+        </ul>
+      </ul>
+
+      <h4> Claim Type </h4>
+      <p>There are <b>4 types</b> of claim in this task.</p>
+      <p>1. <strong style="background-color:rgba( 0, 102, 255, 0.25 )" >Claim Value (something is good or bad, important or not important) </strong></p>
+      <ul>
+        <li>E.g.) "the most important work for students is study."</li>
+        <li>E.g.) "Then, some instructions such as homework is very important."</li>
+      </ul>
+      <p>2. <strong style="background-color:rgba( 223, 51, 78, 0.3 )">Claim Fact (something is true or false)</strong></p>
+      <ul>
+        <li>E.g.) "what students will do during free time is just playing games and chatting using SNS in most cases or just sleeping as they said."</li>
+        <li>E.g.) "only a few of them can gain money through the activity."</li>
+      </ul>
+      <p>3. <strong style="background-color:rgba( 51, 204, 102, 0.3 )">Claim Policy (claiming that some action should or should not be taken)</strong></p>
+      <ul>
+        <li>E.g.) "So we can get more free time just by reducing the amount of our homework."</li>
+        <li>E.g.) "If what they really want to do is such a 'less useful activity', they should do it current free time, for example after finishing their homework."</li>
+      </ul>
+      <p>4. <strong style="background-color:rgba( 248, 203, 51, 0.5 )">Restatement (paraphrasing an statement that adds no new information)</strong></p>
+      <ul>
+        <li><b>When you annotate this type, you have to choose the claim which is paraphrase source.</b></li>
+        <li>The summary sentence, for example "That's why ...", should be annotated by this type.</li>
+        <li>E.g.) Claim Fact: "They are enough time to do our hobbies or play firends."</li>
+        <li>E.g.) Restatement: "Students have a lot of free time than you think. At least, they have more free time than adults."</li>
+      </ul>
+      <p><font color="red">* When you identify some claim types in one sentence, choose one type which a speaker wants to insist more.</font></p>
+
+      <!-- アノテーションについて画像をつけながら説明
+      <h4><strong>How to annotate</strong></h4>
+      <ul>
+        <li>
+          <img src="./MTurk_claim_ex1.png" width="60%" height="auto">
+        </li>
+      </ul>
+    -->
+
+      <!-- 以下 タスク画面 -->
+      <hr>
+
+      <div>
+          <h4><b>Topic: </b><!--${topic}--> Homework should be abolished.</h4>
+      </div>
+      <h5><b>Constructive speech</b></h5>
+      <div class="pm-speech">
+        We believe that if homework were to be abolished, we could have more free time. As a result, we could do more of what we really wanted like club activities, hobbies, or playing with friends.In my case, I go to tennis club after class until 5:00 pm and then I go to cram school until 8:00 pm. After this full day, I arrive at my home around 8:40 pm to eat dinner and take a shower. At nearly 10:00 pm I start my homework. I have a lot of homework. As a result, I go to belate at night at nearly 1:00 am in the morning and I don’t have the opportunity to sleep for a long period of time. It is not healthy.
+        <!-- ${pm_speech} -->
+      </div>
+
+      <h5><b>Rebuttal speech</b></h5>
+      <!-- テーブル作成 ID, Speaker, Speech-->
+      <table border="1" style="width: 100%;" id="table_lo">
+        <tbody>
+          <!-- row1 -->
+          <tr>
+            <td align="center" style="width: 5%;; background-color: rgb(0, 0, 0);">
+              <span style="color: rgb(255, 255, 255);">ID</span>
+            </td>
+            <td align="center" style="width: 10%; background-color: rgb(0, 0, 0);">
+              <span style="color: rgb(255, 255, 255);">Speech</span>
+            </td>
+            <td align="center" style="width: 85%; background-color: rgb(0, 0, 0);">
+              <span style="color: rgb(255, 255, 255);">Restatement Source</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ClaimType選択 3つのボタン -->
+      <div style="padding:10px 0 0 0">
+        <button type="button" id="btn-claim-value" class="btn-large btn-sentence-claim-value">Claim Value</button>
+        <button type="button" id="btn-claim-fact" class="btn-large btn-sentence-claim-fact">Claim Fact</button>
+        <button type="button" id="btn-claim-policy" class="btn-large btn-sentence-claim-policy">Claim Policy</button>
+        <button type="button" id="btn-restatement" class="btn-large btn-sentence-restatement">Restatement</button>
+      </div>
+      <!-- 'Clear', 'All Clear' の2つのボタン -->
+      <div style="padding:5px 0 20px 0">
+        <button type="button" id="btn-clear" class="btn-large btn-secondary">Clear</button>
+        <button type="button" id="btn-all-clear" class="btn-large btn-secondary">All Clear</button>
+      </div>
+    </div>
+
+    <div style="padding:20px 0 0 0">
+      <!--
+      <div class="alert">
+        <button type="button" class="close" data-dismiss="alert"></button>
+        <strong>NOTE !</strong>
+        <br />Forms below will be automatically filled out with marked sentences.
+        <br />Please do not edit them.
+      </div>
+    -->
+      <div>
+        <textarea name="Claim Value ID:" class="uid-claim-value-text-area"></textarea>
+        <textarea name="Claim Fact ID:" class="uid-claim-fact-text-area"></textarea>
+        <textarea name="Claim Policy ID:" class="uid-claim-policy-text-area"></textarea>
+        <textarea name="Restatement ID:" class="uid-restatement-text-area"></textarea>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+
+<style type="text/css">
+.pm-speech{
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px
+  dashed #333333;
+  width:100%;
+}
+.btn-sentence{
+  display: inline-block;
+  padding: 5px 5px;
+  border: solid 1px #FFFFFF;
+  border-radius: 3px;
+  color: #333;
+  background: #FFFFFF;
+  text-decoration: none;
+  font-weight: normal;
+  font-family: Helvetica, Arial, sans-serif;
+  width: 100%;
+  text-align: left;
+}
+/*.label-sentence{
+  padding: 7px 5px;
+  border-radius: 3px;
+  color: #333;
+  background: #FFFFFF;
+  text-decoration: none;
+  font-weight: normal;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: left;
+} */
+.btn-sentence:hover{
+  color: #FFFFFF;
+  background: #CCCCCC;
+}
+.btn-sentence-selected{
+  color: #FFFFFF;
+  background: #BBBBBB;
+}
+.btn-sentence-claim-value{
+  color: #FFFFFF;
+  background: #3169B3;
+}
+.btn-sentence-claim-fact{
+  color: #FFFFFF;
+  background: #cd5c5c;
+}
+.btn-sentence-claim-policy{
+  color: #FFFFFF;
+  background: #6CBB5A;
+}
+.btn-sentence-restatement{
+  color: #FFFFFF;
+  background: #F8960C;
+}
+</style>
+
+
+<script type="text/javascript">
+// --- 準備：LOスピーチを画面上に準備する．---
+// １文単位でfor loop テーブルに出力
+$(document).ready(function() {
+  utterances = ("They said that homework robs us of our free time.\nHowever,Students have holidays and two long vacations in a year.\nThey are enough time to do our hobbies or play friends.\nWe can go trip in a vacation and play friends in holidays.\nAlso, We can talk with friends at break time in school.\nAnd besides, We may not have such a lot of homework and cram school everyday.\nStudents have a lot of free time than you think.\nAt least, they have more free time than adults.").split('\n');
+  //console.log(utterances);
+  utterances.forEach(function (value, index, array) {
+    $('#table_lo').append(
+      '<tr>' +
+        '<td align="center" style="width: 5%;">' +
+          index +
+        '</td>' +
+        '<td align="center" style="width: 80.0000%;">' +
+          '<button type="button" id="display_u'+index+'" class="btn-large btn-sentence">' +
+            value +
+          '</button>' +
+        '</td>' +
+        '<td>' +
+          '<select id="reference_'+index+'" name="restatement source('+index+')" style="width:100%; display:none;" required>' +
+            '<option disabled selected value> -- select an ID -- </option>' +
+          '</select>' +
+        '</td>' +
+      '</tr>');
+  });
+
+  const utterances_length = utterances.length;
+
+  // --- 以下処理内容 ---
+  $('[id^=display]').click(function(){
+    $(this).toggleClass('btn-sentence-selected');
+  });
+
+  function remove_utterance_from_text_area(text_area_name, utterance_id){
+    text_area_value = $(text_area_name).val();
+    if(text_area_value){
+      utterance_ids = text_area_value.split('\n');
+      for(i = 0; i < utterance_ids.length; i++){
+        if(utterance_ids[i] == utterance_id){
+          utterance_ids.splice(i, 1);
+        };
+      };
+      $(text_area_name).val(utterance_ids.join('\n'));
+    };
+  }
+
+  function remove_utterance_from_all_text_area(utterance_id){
+    remove_utterance_from_text_area('.uid-claim-value-text-area', utterance_id);
+    remove_utterance_from_text_area('.uid-claim-fact-text-area', utterance_id);
+    remove_utterance_from_text_area('.uid-claim-policy-text-area', utterance_id);
+    remove_utterance_from_text_area('.uid-restatement-text-area', utterance_id)
+  }
+
+  function remove_all_utterances(){
+    $('.uid-claim-value-text-area').val('');
+    $('.uid-claim-fact-text-area').val('');
+    $('.uid-claim-policy-text-area').val('');
+    $('.uid-restatement-text-area').val('');
+  }
+
+  function add_utterance_id(claim_type){
+    text_area_value = $(".uid-"+claim_type+"-text-area").val('');
+    type_array = [claim_type]
+    utterance_ids_array = get_utterances_ids(type_array);
+    $(".uid-"+claim_type+"-text-area").val(utterance_ids_array.join('\n'));
+  }
+
+  function get_utterances_ids(type_array){
+    // type_array = ['claim-value', 'claim-fact', 'claim-policy', 'restatement']
+    utterance_ids_array = [];
+    for (let idx in type_array){
+      cs = document.getElementsByClassName('btn-sentence btn-sentence-'+type_array[idx]);
+      for (var i=0; i< cs.length;i++){
+        idd = cs[i].getAttribute("id");
+        utterance_id = extract_utterance_id(idd);
+        utterance_ids_array.push(utterance_id);
+      };
+    };
+    utterance_ids_array.sort();
+    return utterance_ids_array;
+  }
+
+  function clear_selected_state(index, element){
+    $(element).removeClass(function (index, className) {
+      return (className.match (/(^|\s)btn-sentence-\S+/g) || []).join(' ');
+    });
+  }
+
+  function extract_utterance_id(btn_id){
+    return btn_id.match(/.+_u(.+)/)[1];
+  }
+
+  function clear_drop_down_btn(utterances_length){
+    for (let i=0; i<utterances_length; i++){
+      $('select#reference_'+i+' option').remove();
+      $('#reference_'+i).append($('<option disabled selected value>').html(' -- select an ID -- '));
+    };
+  }
+
+  // --- 以下ボタン押した時の処理 ---
+  // claim-value btn
+  $('[id^=btn-claim-value]').click(function(){
+    $("[id^=display_u]").each(function(index, element){
+      if($(this).hasClass("btn-sentence-selected")){
+        utterance_id = extract_utterance_id($(this).attr("id"));
+        clear_selected_state(index, element);
+        $(element).addClass('btn-sentence-claim-value');
+        add_utterance_id('claim-value');
+      };
+    });
+  });
+
+  // claim-fact btn
+  $('[id^=btn-claim-fact]').click(function(){
+    $("[id^=display_u]").each(function(index, element){
+      if($(this).hasClass("btn-sentence-selected")){
+        utterance_id = extract_utterance_id($(this).attr("id"));
+        clear_selected_state(index, element);
+        $(element).addClass('btn-sentence-claim-fact');
+        add_utterance_id('claim-fact');
+      };
+    });
+  });
+
+  // claim-policy btn
+  $('[id^=btn-claim-policy]').click(function(){
+    $("[id^=display_u]").each(function(index, element){
+      if($(this).hasClass("btn-sentence-selected")){
+        utterance_id = extract_utterance_id($(this).attr("id"));
+        clear_selected_state(index, element);
+        $(element).addClass('btn-sentence-claim-policy');
+        add_utterance_id('claim-policy');
+      };
+    });
+  });
+
+  // restatement btn
+  $('[id^=btn-restatement]').click(function(){
+    $("[id^=display_u]").each(function(index, element){
+      if($(this).hasClass("btn-sentence-selected")){
+        utterance_id = extract_utterance_id($(this).attr("id"));
+        clear_selected_state(index, element);
+        $(element).addClass('btn-sentence-restatement');
+        add_utterance_id('restatement');
+        // リステイトメント先プルダウン表示, 要素追加
+        $('#reference_'+index).prop('required',true);
+        $('#reference_'+index).show();
+        type_array = ['claim-value', 'claim-fact', 'claim-policy'];
+        utterance_ids_array = get_utterances_ids(type_array);
+        for (let i in utterance_ids_array){
+          $('#reference_'+index).append($('<option>').html('ID : '+utterance_ids_array[i]));
+        };
+      };
+    });
+  });
+
+  // clear btn
+  $('[id^=btn-clear]').click(function(){
+    $("[id^=display_u]").each(function(index, element){
+      if($(this).hasClass("btn-sentence-selected")){
+        utterance_id = extract_utterance_id($(this).attr("id"));
+        clear_selected_state(index, element);
+        // リステイトメント先プルダウン非表示
+        $('#reference_'+index).hide();
+        clear_drop_down_btn(utterances_length);
+        remove_utterance_from_all_text_area(utterance_id);
+      };
+    });
+  });
+
+  // all-clear btn
+  $('[id^=btn-all-clear]').click(function(){
+    $("[id^=display_u]").each(function(index, element){
+      utterance_id = extract_utterance_id($(this).attr("id"));
+      clear_selected_state(index, element);
+      // リステイトメント先プルダウン非表示
+      $('#reference_'+index).hide();
+      clear_drop_down_btn(utterances_length);
+      remove_all_utterances();
+    });
+  });
+
+  // 提出時のエラー
+  document.querySelector('crowd-form').onsubmit = function(e ) {
+    claim_value_text = $('.uid-claim-value-text-area').val();
+    claim_fact_text = $('.uid-claim-fact-text-area').val();
+    claim_policy_text = $('.uid-claim-policy-text-area').val();
+    if (claim_value_text=="" && claim_fact_text=="" && claim_policy_text==""){
+      console.log('test error');
+      alert("Please select a claim at least one.")
+      e.preventDefault();
+    };
+  };
+
+});
+</script>
+
+</crowd-form>
