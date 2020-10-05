@@ -300,6 +300,7 @@ $(document).ready(function() {
         utterance_id = extract_utterance_id($(this).attr("id"));
         clear_selected_state(index, element);
         $(element).addClass('btn-sentence-claim-value');
+        remove_utterance_from_all_text_area(utterance_id);
         add_utterance_id('claim-value');
       };
     });
@@ -312,6 +313,7 @@ $(document).ready(function() {
         utterance_id = extract_utterance_id($(this).attr("id"));
         clear_selected_state(index, element);
         $(element).addClass('btn-sentence-claim-fact');
+        remove_utterance_from_all_text_area(utterance_id);
         add_utterance_id('claim-fact');
       };
     });
@@ -324,6 +326,7 @@ $(document).ready(function() {
         utterance_id = extract_utterance_id($(this).attr("id"));
         clear_selected_state(index, element);
         $(element).addClass('btn-sentence-claim-policy');
+        remove_utterance_from_all_text_area(utterance_id);
         add_utterance_id('claim-policy');
       };
     });
@@ -336,6 +339,7 @@ $(document).ready(function() {
         utterance_id = extract_utterance_id($(this).attr("id"));
         clear_selected_state(index, element);
         $(element).addClass('btn-sentence-restatement');
+        remove_utterance_from_all_text_area(utterance_id);
         add_utterance_id('restatement');
         // リステイトメント先プルダウン表示, 要素追加
         $('#reference_'+index).prop('required',true);
