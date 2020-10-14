@@ -104,9 +104,13 @@
       <!-- ClaimType選択 3つのボタン -->
       <div style="padding:10px 0 0 0">
         <button type="button" id="btn-claim-value" class="btn-large btn-sentence-claim-value">Claim Value</button>
+        <nobr> : something is good or bad, important or not important</nobr><br>
         <button type="button" id="btn-claim-fact" class="btn-large btn-sentence-claim-fact">Claim Fact</button>
+        <nobr> : something is true or false.</nobr><br>
         <button type="button" id="btn-claim-policy" class="btn-large btn-sentence-claim-policy">Claim Policy</button>
+        <nobr> : some action should or should not be taken</nobr><br>
         <button type="button" id="btn-restatement" class="btn-large btn-sentence-restatement">Restatement</button>
+        <nobr> : paraphrase of a original claim</nobr>
       </div>
       <!-- 'Clear', 'All Clear' の2つのボタン -->
       <div style="padding:5px 0 20px 0">
@@ -289,47 +293,65 @@
       $('#reference_'+index).hide();
     }
 
+    function check_number_of_claim(max_number=2){
+      type_array = ['claim-value', 'claim-fact', 'claim-policy'];
+      utterance_ids_array = get_utterances_ids(type_array);
+      return utterance_ids_array.length <= max_number
+    }
+
     // --- 以下ボタン押した時の処理 ---
     // claim-value btn
     $('[id^=btn-claim-value]').click(function(){
-      $("[id^=display_u]").each(function(index, element){
-        if($(this).hasClass("btn-sentence-selected")){
-          utterance_id = extract_utterance_id($(this).attr("id"));
-          clear_selected_state(index, element);
-          $(element).addClass('btn-sentence-claim-value');
-          remove_utterance_from_all_text_area(utterance_id);
-          add_or_clear_drop_down_option(utterances_length, index);
-          add_utterance_id('claim-value');
-        };
-      });
+      if(check_number_of_claim()){
+        $("[id^=display_u]").each(function(index, element){
+          if($(this).hasClass("btn-sentence-selected")){
+            utterance_id = extract_utterance_id($(this).attr("id"));
+            clear_selected_state(index, element);
+            $(element).addClass('btn-sentence-claim-value');
+            remove_utterance_from_all_text_area(utterance_id);
+            add_or_clear_drop_down_option(utterances_length, index);
+            add_utterance_id('claim-value');
+          };
+        });
+      }else {
+        alert("Can't select more than 3 claims.");
+      };
     })
 
     // claim-fact btn
     $('[id^=btn-claim-fact]').click(function(){
-      $("[id^=display_u]").each(function(index, element){
-        if($(this).hasClass("btn-sentence-selected")){
-          utterance_id = extract_utterance_id($(this).attr("id"));
-          clear_selected_state(index, element);
-          $(element).addClass('btn-sentence-claim-fact');
-          remove_utterance_from_all_text_area(utterance_id);
-          add_or_clear_drop_down_option(utterances_length, index);
-          add_utterance_id('claim-fact');
-        };
-      });
+      if(check_number_of_claim()){
+        $("[id^=display_u]").each(function(index, element){
+          if($(this).hasClass("btn-sentence-selected")){
+            utterance_id = extract_utterance_id($(this).attr("id"));
+            clear_selected_state(index, element);
+            $(element).addClass('btn-sentence-claim-fact');
+            remove_utterance_from_all_text_area(utterance_id);
+            add_or_clear_drop_down_option(utterances_length, index);
+            add_utterance_id('claim-fact');
+          };
+        });
+      }else {
+        alert("Can't select more than 3 claims.");
+      };
     })
 
     // claim-policy btn
     $('[id^=btn-claim-policy]').click(function(){
-      $("[id^=display_u]").each(function(index, element){
-        if($(this).hasClass("btn-sentence-selected")){
-          utterance_id = extract_utterance_id($(this).attr("id"));
-          clear_selected_state(index, element);
-          $(element).addClass('btn-sentence-claim-policy');
-          remove_utterance_from_all_text_area(utterance_id);
-          add_or_clear_drop_down_option(utterances_length, index);
-          add_utterance_id('claim-policy');
-        };
-      });
+      if(check_number_of_claim()){
+        $("[id^=display_u]").each(function(index, element){
+          if($(this).hasClass("btn-sentence-selected")){
+            utterance_id = extract_utterance_id($(this).attr("id"));
+            clear_selected_state(index, element);
+            $(element).addClass('btn-sentence-claim-policy');
+            remove_utterance_from_all_text_area(utterance_id);
+            add_or_clear_drop_down_option(utterances_length, index);
+            add_utterance_id('claim-policy');
+          };
+        });
+      }else {
+        alert("Can't select more than 3 claims.");
+      };
     })
 
     // restatement btn
