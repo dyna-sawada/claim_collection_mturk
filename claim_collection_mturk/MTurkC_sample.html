@@ -225,6 +225,12 @@
 
     const utterances_length = utterances.length;
 
+    they_said_sentences = ("They said that homework robs us of our free time.").split('\n');
+    for(i = 0; i < they_said_sentences.length; i++){
+      //console.log($('#display_u'+i));
+      $('#display_u'+i).prop('disabled',true);
+    }
+
     // --- 以下処理内容 ---
     $('[id^=display]').click(function(){
       $(this).toggleClass('btn-sentence-selected');

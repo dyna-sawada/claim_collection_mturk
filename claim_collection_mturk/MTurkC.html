@@ -129,6 +129,7 @@
     </div>
   </div>
   <div id='lo_sentences' style='display:none'>${lo_sentences}</div>
+  <div id='they_said_sentences' style='display:none'>${they_said}</div>
   <hr>
   <p><strong><font color="red">WARNING!（need to copy&paste）</font></strong></p>
 
@@ -206,6 +207,10 @@
 
     const utterances_length = utterances.length;
 
+    they_said_sentences = $('#they_sentences').text().split('\n');
+    for(i = 0; i < they_said_sentences.length; i++){
+      $('#display_u'+i).prop('disabled',true);
+    }
 
     // --- 以下処理内容 ---
     $('[id^=display]').click(function(){
