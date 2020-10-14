@@ -129,270 +129,268 @@
 
 
 <style type="text/css">
-.pm-speech{
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px
-  dashed #333333;
-  width:100%;
-}
-.btn-sentence{
-  display: inline-block;
-  padding: 5px 5px;
-  border: solid 1px #FFFFFF;
-  border-radius: 3px;
-  color: #333;
-  background: #FFFFFF;
-  text-decoration: none;
-  font-weight: normal;
-  font-family: Helvetica, Arial, sans-serif;
-  width: 100%;
-  text-align: left;
-}
-.btn-sentence:hover{
-  color: #FFFFFF;
-  background: #CCCCCC;
-}
-.btn-sentence-selected{
-  color: #FFFFFF;
-  background: #BBBBBB !important;
-}
-.btn-sentence-claim-value{
-  color: #FFFFFF;
-  background: #3169B3;
-}
-.btn-sentence-claim-fact{
-  color: #FFFFFF;
-  background: #cd5c5c;
-}
-.btn-sentence-claim-policy{
-  color: #FFFFFF;
-  background: #6CBB5A;
-}
-.btn-sentence-restatement{
-  color: #FFFFFF;
-  background: #F8960C;
-}
+  .pm-speech{
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px
+    dashed #333333;
+    width:100%;
+  }
+  .btn-sentence{
+    display: inline-block;
+    padding: 5px 5px;
+    border: solid 1px #FFFFFF;
+    border-radius: 3px;
+    color: #333;
+    background: #FFFFFF;
+    text-decoration: none;
+    font-weight: normal;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 100%;
+    text-align: left;
+  }
+  .btn-sentence:hover{
+    color: #FFFFFF;
+    background: #CCCCCC;
+  }
+  .btn-sentence-selected{
+    color: #FFFFFF;
+    background: #BBBBBB !important;
+  }
+  .btn-sentence-claim-value{
+    color: #FFFFFF;
+    background: #3169B3;
+  }
+  .btn-sentence-claim-fact{
+    color: #FFFFFF;
+    background: #cd5c5c;
+  }
+  .btn-sentence-claim-policy{
+    color: #FFFFFF;
+    background: #6CBB5A;
+  }
+  .btn-sentence-restatement{
+    color: #FFFFFF;
+    background: #F8960C;
+  }
 </style>
 
-
 <script type="text/javascript">
-// 準備：LOスピーチを画面上に準備する．
-// １文単位でfor loop テーブルに出力
-$(function(){
-  utterances = $('#lo_sentences').text().split('\n');
-  utterances.forEach(function (value, index, array) {
-    $('#table_lo').append(
-      '<tr>' +
-        '<td align="center" style="width: 5%;">' +
-          index +
-        '</td>' +
-        '<td align="center" style="width: 80.0000%;">' +
-          '<button type="button" id="display_u'+index+'" class="btn-large btn-sentence">' +
-            value +
-          '</button>' +
-        '</td>' +
-        '<td>' +
-          '<select id="reference_'+index+'" name="restatement source('+index+')" style="width:100%; display:none;">' +
-            '<option disabled selected value> -- select an ID -- </option>' +
-          '</select>' +
-        '</td>' +
-      '</tr>');
-  });
+  // 準備：LOスピーチを画面上に準備する．
+  // １文単位でfor loop テーブルに出力
+  $(function(){
+    utterances = $('#lo_sentences').text().split('\n');
+    utterances.forEach(function (value, index, array) {
+      $('#table_lo').append(
+        '<tr>' +
+          '<td align="center" style="width: 5%;">' +
+            index +
+          '</td>' +
+          '<td align="center" style="width: 80.0000%;">' +
+            '<button type="button" id="display_u'+index+'" class="btn-large btn-sentence">' +
+              value +
+            '</button>' +
+          '</td>' +
+          '<td>' +
+            '<select id="reference_'+index+'" name="restatement source('+index+')" style="width:100%; display:none;">' +
+              '<option disabled selected value> -- select an ID -- </option>' +
+            '</select>' +
+          '</td>' +
+        '</tr>');
+    })
 
-  const utterances_length = utterances.length;
+    const utterances_length = utterances.length;
 
 
-  // --- 以下処理内容 ---
-  $('[id^=display]').click(function(){
-    $(this).toggleClass('btn-sentence-selected');
-  });
+    // --- 以下処理内容 ---
+    $('[id^=display]').click(function(){
+      $(this).toggleClass('btn-sentence-selected');
+    })
 
-  function remove_utterance_from_text_area(text_area_name, utterance_id){
-    text_area_value = $(text_area_name).val();
-    if(text_area_value){
-      utterance_ids = text_area_value.split('\n');
-      for(i = 0; i < utterance_ids.length; i++){
-        if(utterance_ids[i] == utterance_id){
-          utterance_ids.splice(i, 1);
+    function remove_utterance_from_text_area(text_area_name, utterance_id){
+      text_area_value = $(text_area_name).val();
+      if(text_area_value){
+        utterance_ids = text_area_value.split('\n');
+        for(i = 0; i < utterance_ids.length; i++){
+          if(utterance_ids[i] == utterance_id){
+            utterance_ids.splice(i, 1);
+          };
+        };
+        $(text_area_name).val(utterance_ids.join('\n'));
+      };
+    }
+
+    function remove_utterance_from_all_text_area(utterance_id){
+      remove_utterance_from_text_area('.uid-claim-value-text-area', utterance_id);
+      remove_utterance_from_text_area('.uid-claim-fact-text-area', utterance_id);
+      remove_utterance_from_text_area('.uid-claim-policy-text-area', utterance_id);
+      remove_utterance_from_text_area('.uid-restatement-text-area', utterance_id)
+    }
+
+    function remove_all_utterances(){
+      $('.uid-claim-value-text-area').val('');
+      $('.uid-claim-fact-text-area').val('');
+      $('.uid-claim-policy-text-area').val('');
+      $('.uid-restatement-text-area').val('');
+    }
+
+    function add_utterance_id(claim_type){
+      text_area_value = $(".uid-"+claim_type+"-text-area").val('');
+      type_array = [claim_type]
+      utterance_ids_array = get_utterances_ids(type_array);
+      $(".uid-"+claim_type+"-text-area").val(utterance_ids_array.join('\n'));
+    }
+
+    function get_utterances_ids(type_array){
+      // type_array = ['claim-value', 'claim-fact', 'claim-policy', 'restatement']
+      utterance_ids_array = [];
+      for (let idx in type_array){
+        cs = document.getElementsByClassName('btn-sentence btn-sentence-'+type_array[idx]);
+        for (var i=0; i< cs.length;i++){
+          idd = cs[i].getAttribute("id");
+          utterance_id = extract_utterance_id(idd);
+          utterance_ids_array.push(utterance_id);
         };
       };
-      $(text_area_name).val(utterance_ids.join('\n'));
-    };
-  }
+      utterance_ids_array.sort();
+      return utterance_ids_array;
+    }
 
-  function remove_utterance_from_all_text_area(utterance_id){
-    remove_utterance_from_text_area('.uid-claim-value-text-area', utterance_id);
-    remove_utterance_from_text_area('.uid-claim-fact-text-area', utterance_id);
-    remove_utterance_from_text_area('.uid-claim-policy-text-area', utterance_id);
-    remove_utterance_from_text_area('.uid-restatement-text-area', utterance_id)
-  }
+    function clear_selected_state(index, element){
+      $(element).removeClass(function (index, className) {
+        return (className.match (/(^|\s)btn-sentence-\S+/g) || []).join(' ');
+      });
+    }
 
-  function remove_all_utterances(){
-    $('.uid-claim-value-text-area').val('');
-    $('.uid-claim-fact-text-area').val('');
-    $('.uid-claim-policy-text-area').val('');
-    $('.uid-restatement-text-area').val('');
-  }
+    function extract_utterance_id(btn_id){
+      return btn_id.match(/.+_u(.+)/)[1];
+    }
 
-  function add_utterance_id(claim_type){
-    text_area_value = $(".uid-"+claim_type+"-text-area").val('');
-    type_array = [claim_type]
-    utterance_ids_array = get_utterances_ids(type_array);
-    $(".uid-"+claim_type+"-text-area").val(utterance_ids_array.join('\n'));
-  }
-
-  function get_utterances_ids(type_array){
-    // type_array = ['claim-value', 'claim-fact', 'claim-policy', 'restatement']
-    utterance_ids_array = [];
-    for (let idx in type_array){
-      cs = document.getElementsByClassName('btn-sentence btn-sentence-'+type_array[idx]);
-      for (var i=0; i< cs.length;i++){
-        idd = cs[i].getAttribute("id");
-        utterance_id = extract_utterance_id(idd);
-        utterance_ids_array.push(utterance_id);
-      };
-    };
-    utterance_ids_array.sort();
-    return utterance_ids_array;
-  }
-
-  function clear_selected_state(index, element){
-    $(element).removeClass(function (index, className) {
-      return (className.match (/(^|\s)btn-sentence-\S+/g) || []).join(' ');
-    });
-  }
-
-  function extract_utterance_id(btn_id){
-    return btn_id.match(/.+_u(.+)/)[1];
-  }
-
-  function clear_drop_down_btn(utterances_length){
-    for (let i=0; i<utterances_length; i++){
-      $('#reference_'+i).prop('required',false);
-      $('select#reference_'+i+' option').remove();
-      $('#reference_'+i).append($('<option disabled selected value>').html(' -- select an ID -- '));
-    };
-  }
-
-  function add_or_clear_drop_down_option(utterances_length, index){
-    for (let i=0; i<utterances_length; i++){
-      if($("#display_u"+i).hasClass("btn-sentence-restatement")){
-        $('#reference_'+i).prop('required',true);
-        $('#reference_'+i).append($('<option>').html('ID : '+index));
-      }
-      else{
+    function clear_drop_down_btn(utterances_length){
+      for (let i=0; i<utterances_length; i++){
         $('#reference_'+i).prop('required',false);
         $('select#reference_'+i+' option').remove();
         $('#reference_'+i).append($('<option disabled selected value>').html(' -- select an ID -- '));
       };
-    };
-    $('#reference_'+index).hide();
-  }
+    }
 
-  // --- 以下ボタン押した時の処理 ---
-  // claim-value btn
-  $('[id^=btn-claim-value]').click(function(){
-    $("[id^=display_u]").each(function(index, element){
-      if($(this).hasClass("btn-sentence-selected")){
-        utterance_id = extract_utterance_id($(this).attr("id"));
-        clear_selected_state(index, element);
-        $(element).addClass('btn-sentence-claim-value');
-        remove_utterance_from_all_text_area(utterance_id);
-        add_or_clear_drop_down_option(utterances_length, index);
-        add_utterance_id('claim-value');
-      };
-    });
-  });
-
-  // claim-fact btn
-  $('[id^=btn-claim-fact]').click(function(){
-    $("[id^=display_u]").each(function(index, element){
-      if($(this).hasClass("btn-sentence-selected")){
-        utterance_id = extract_utterance_id($(this).attr("id"));
-        clear_selected_state(index, element);
-        $(element).addClass('btn-sentence-claim-fact');
-        remove_utterance_from_all_text_area(utterance_id);
-        add_or_clear_drop_down_option(utterances_length, index);
-        add_utterance_id('claim-fact');
-      };
-    });
-  });
-
-  // claim-policy btn
-  $('[id^=btn-claim-policy]').click(function(){
-    $("[id^=display_u]").each(function(index, element){
-      if($(this).hasClass("btn-sentence-selected")){
-        utterance_id = extract_utterance_id($(this).attr("id"));
-        clear_selected_state(index, element);
-        $(element).addClass('btn-sentence-claim-policy');
-        remove_utterance_from_all_text_area(utterance_id);
-        add_or_clear_drop_down_option(utterances_length, index);
-        add_utterance_id('claim-policy');
-      };
-    });
-  });
-
-  // restatement btn
-  $('[id^=btn-restatement]').click(function(){
-    $("[id^=display_u]").each(function(index, element){
-      if($(this).hasClass("btn-sentence-selected")){
-        utterance_id = extract_utterance_id($(this).attr("id"));
-        clear_selected_state(index, element);
-        $(element).addClass('btn-sentence-restatement');
-        remove_utterance_from_all_text_area(utterance_id);
-        add_utterance_id('restatement');
-        // リステイトメント先プルダウン表示, 要素追加
-        $('#reference_'+index).prop('required',true);
-        $('#reference_'+index).show();
-        type_array = ['claim-value', 'claim-fact', 'claim-policy'];
-        utterance_ids_array = get_utterances_ids(type_array);
-        for (let i in utterance_ids_array){
-          $('#reference_'+index).append($('<option>').html('ID : '+utterance_ids_array[i]));
+    function add_or_clear_drop_down_option(utterances_length, index){
+      for (let i=0; i<utterances_length; i++){
+        if($("#display_u"+i).hasClass("btn-sentence-restatement")){
+          $('#reference_'+i).prop('required',true);
+          $('#reference_'+i).append($('<option>').html('ID : '+index));
+        }
+        else{
+          $('#reference_'+i).prop('required',false);
+          $('select#reference_'+i+' option').remove();
+          $('#reference_'+i).append($('<option disabled selected value>').html(' -- select an ID -- '));
         };
       };
-    });
-  });
+      $('#reference_'+index).hide();
+    }
 
-  // clear btn
-  $('[id^=btn-clear]').click(function(){
-    $("[id^=display_u]").each(function(index, element){
-      if($(this).hasClass("btn-sentence-selected")){
+    // --- 以下ボタン押した時の処理 ---
+    // claim-value btn
+    $('[id^=btn-claim-value]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
+        if($(this).hasClass("btn-sentence-selected")){
+          utterance_id = extract_utterance_id($(this).attr("id"));
+          clear_selected_state(index, element);
+          $(element).addClass('btn-sentence-claim-value');
+          remove_utterance_from_all_text_area(utterance_id);
+          add_or_clear_drop_down_option(utterances_length, index);
+          add_utterance_id('claim-value');
+        };
+      });
+    })
+
+    // claim-fact btn
+    $('[id^=btn-claim-fact]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
+        if($(this).hasClass("btn-sentence-selected")){
+          utterance_id = extract_utterance_id($(this).attr("id"));
+          clear_selected_state(index, element);
+          $(element).addClass('btn-sentence-claim-fact');
+          remove_utterance_from_all_text_area(utterance_id);
+          add_or_clear_drop_down_option(utterances_length, index);
+          add_utterance_id('claim-fact');
+        };
+      });
+    })
+
+    // claim-policy btn
+    $('[id^=btn-claim-policy]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
+        if($(this).hasClass("btn-sentence-selected")){
+          utterance_id = extract_utterance_id($(this).attr("id"));
+          clear_selected_state(index, element);
+          $(element).addClass('btn-sentence-claim-policy');
+          remove_utterance_from_all_text_area(utterance_id);
+          add_or_clear_drop_down_option(utterances_length, index);
+          add_utterance_id('claim-policy');
+        };
+      });
+    })
+
+    // restatement btn
+    $('[id^=btn-restatement]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
+        if($(this).hasClass("btn-sentence-selected")){
+          utterance_id = extract_utterance_id($(this).attr("id"));
+          clear_selected_state(index, element);
+          $(element).addClass('btn-sentence-restatement');
+          remove_utterance_from_all_text_area(utterance_id);
+          add_utterance_id('restatement');
+          // リステイトメント先プルダウン表示, 要素追加
+          $('#reference_'+index).prop('required',true);
+          $('#reference_'+index).show();
+          type_array = ['claim-value', 'claim-fact', 'claim-policy'];
+          utterance_ids_array = get_utterances_ids(type_array);
+          for (let i in utterance_ids_array){
+            $('#reference_'+index).append($('<option>').html('ID : '+utterance_ids_array[i]));
+          };
+        };
+      });
+    })
+
+    // clear btn
+    $('[id^=btn-clear]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
+        if($(this).hasClass("btn-sentence-selected")){
+          utterance_id = extract_utterance_id($(this).attr("id"));
+          clear_selected_state(index, element);
+          // リステイトメント先プルダウン非表示
+          $('#reference_'+index).hide();
+          clear_drop_down_btn(utterances_length);
+          remove_utterance_from_all_text_area(utterance_id);
+        };
+      });
+    })
+
+    // all-clear btn
+    $('[id^=btn-all-clear]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
         utterance_id = extract_utterance_id($(this).attr("id"));
         clear_selected_state(index, element);
         // リステイトメント先プルダウン非表示
         $('#reference_'+index).hide();
         clear_drop_down_btn(utterances_length);
-        remove_utterance_from_all_text_area(utterance_id);
+        remove_all_utterances();
+      });
+    })
+
+    // 提出時のエラー
+    document.querySelector('crowd-form').onsubmit = function(e ) {
+      claim_value_text = $('.uid-claim-value-text-area').val();
+      claim_fact_text = $('.uid-claim-fact-text-area').val();
+      claim_policy_text = $('.uid-claim-policy-text-area').val();
+      if (claim_value_text=="" && claim_fact_text=="" && claim_policy_text==""){
+        console.log('test error');
+        alert("Please select a claim at least one.")
+        e.preventDefault();
       };
-    });
-  });
-
-  // all-clear btn
-  $('[id^=btn-all-clear]').click(function(){
-    $("[id^=display_u]").each(function(index, element){
-      utterance_id = extract_utterance_id($(this).attr("id"));
-      clear_selected_state(index, element);
-      // リステイトメント先プルダウン非表示
-      $('#reference_'+index).hide();
-      clear_drop_down_btn(utterances_length);
-      remove_all_utterances();
-    });
-  });
-
-  // 提出時のエラー
-  document.querySelector('crowd-form').onsubmit = function(e ) {
-    claim_value_text = $('.uid-claim-value-text-area').val();
-    claim_fact_text = $('.uid-claim-fact-text-area').val();
-    claim_policy_text = $('.uid-claim-policy-text-area').val();
-    if (claim_value_text=="" && claim_fact_text=="" && claim_policy_text==""){
-      console.log('test error');
-      alert("Please select a claim at least one.")
-      e.preventDefault();
-    };
-  };
-
-});
+    }
+  })
 </script>
 
 </crowd-form>
