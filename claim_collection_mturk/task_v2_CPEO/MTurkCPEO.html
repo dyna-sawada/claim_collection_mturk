@@ -1,0 +1,577 @@
+<head>
+  <meta charset="utf-8">
+  <!-- meta_name_viewport : スマホ対応 幅から計算 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</head>
+
+<crowd-form answer-format="flatten-objects">
+  <div class="container-fluid">
+    <h3><strong>Overview</strong></h3>
+    <p>
+      Thank you for taking the time to help us!<br/> In this task, you will be presented with arguments from a series of debates. For the argument, we would like for you to identify claims made by the debater and mark them.
+    </p>
+    <p>There are 4 steps to do this task.</p>
+    <ol type="1">
+      <li>Read an original argument which supports the topic such as “Homework should be abolished”.</li>
+      <li>Read a counter-argument against original argument.</li>
+      <li>Determine claims in the counter-argument and their associated type, referred to as 'Claim Type'.</li>
+      <li>Mark the sentences that states claims by selecting sentences and pushing the 'Claim Type' button.</li>
+    </ol>
+
+    <h3><strong>What is a claim?</strong></h3>
+    <p>
+      An argument consists of a <font color="red">claim</font> and a <font color="blue">premise</font>.
+      <ul>
+        <li> <font color="red">claim</font>: central reason given in support of the debater's stance
+        <li> <font color="blue">premise</font>: additional reasons that underpin the plausibility of the claim
+      </ul>
+      For example, the <font color="red">claim</font> is a red sentence and the <font color="blue">premises</font> are blue sentences in the following argument.
+    </p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div style="padding: 20px; border: 1px dashed #333333;">
+            Hello everyone. Today’s topic is “Homework should be abolished”. We have two points: The first point is “free time” and the second point is “decrease burden on teachers”. I will explain the first point of “free time”.
+            <font color="red">We believe that if homework were to be abolished, we could have more free time.</font>
+            <font color="blue">As a result, we could do more of what we really wanted like club activities, hobbies, or playing with friends.
+            It also makes us healthier because it gives us enough time to sleep.</font>
+            Therefore, homework should be abolished. Thank you.
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img class="img-responsive center-block" style="max-width: 100%; height: auto;" src="https://i.gyazo.com/37c1b017b1a52c71d5d3a582bd2a1fd0.jpg">
+        </div>
+      </div>
+      <p>
+        <font color="mediumorchid"><b>Note that in this task, a sentence that states a stance like “Therefore, homework should be abolished.” is not a claim, but rather sentences that directly supports the stance are a claim.</b></font>
+      </p>
+    </div>
+
+    <h3><strong>What is the task?</strong></h3>
+    <p>
+      In this task, we provide two arguments: an original argument and a counter-argument against it.<br> Your task is to determine the following things in the counter-argument and mark them.
+    </p>
+    <ol type="1">
+      <li><b>Claims</b> and their associated type, referred to as <b>'Claim Type'</b></li>
+      <li><b>Restatement</b> of the claim, if any</li>
+      <font color="mediumorchid"><b>*Note that premises are out of scope in this task.</b></font>
+    </ol>
+    <p>1. <u>Determine Claims and their associated type, referred to as 'Claim Type'</u></p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          Claim Type is following 3 types in this task. </p>
+          <ul>
+            <div class="mb-4">
+              <li><span style="background-color:rgba( 0, 102, 255, 0.25 )">Value</span></li>
+              <p>Claiming that something is good or bad, important or not important.<br> E.g.)
+              <ul class="mt-n3">
+                <li>The most important work for students is studying.</li>
+                <li>Then, some instructions such as homework are very important.</li>
+              </ul>
+              </p>
+            </div>
+            <div class="mb-4">
+              <li><span style="background-color:rgba( 223, 51, 78, 0.3 )">Fact</span></li>
+              <p>Claiming that something is true or false.<br> E.g.)
+              <ul class="mt-n3">
+                <li>What students will do during free time is just playing games and chatting using SNS in most cases or just sleeping as they said.</li>
+                <li>Only a few of them can gain money through the activity.</li>
+              </ul>
+              </p>
+            </div>
+            <div>
+              <li><span style="background-color:rgba( 51, 204, 102, 0.3 )">Policy</span></li>
+              <p>Claiming that some action should or should not be taken.<br> E.g.)
+              <ul class="mt-n3">
+                <li>So we can get more free time just by reducing the amount of our homework.</li>
+                <li>If what they really want to do is such a 'less useful activity', they should do it current free time, for example after finishing their homework.</li>
+              </ul>
+              </p>
+            </div>
+          </ul>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <p>How to mark Claim Type</p>
+          <ol>
+            <li>Select sentences you determined as Claim</li>
+            <li>Push the associated Claim Type button for marking</li>
+          </ol>
+          <div>
+            <img class="img-responsive center-block" style="max-width: 90%; height: auto;" src="https://i.gyazo.com/654d17502e9957814899d506684ed9d2.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>2. <u>Determin Restatement of the claim, if any</u></p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <p> In debates, the claim is sometimes restated at the end. In this case, annotate as Restatement and select the original claim.</p>
+          <ul>
+            <div class="mb-4">
+              <li value="4"><span style="background-color:rgba( 248, 203, 51, 0.5 )">Restatement</span></li>
+              <p>Paraphrase of a original claim that the amount of information doesn't change significantly.<br> E.g.)
+              <ul class="mt-n3">
+                <li><b>Original Claim</b>: They have enough time to do their hobbies or play with friends.</li>
+                <li><b>Restatement</b>: Student have a lot of free time than you think. At least, they have more free time than adults.</li>
+              </ul>
+              </p>
+            </div>
+          </ul>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <p>How to mark Restatement</p>
+          <ol>
+            <li>Select sentences you determined as Restatement</li>
+            <li>Push the Restatement button for marking</li>
+            <li>Select ID of the original claim for the Restatement</li>
+          </ol>
+          <div>
+            <img class="img-responsive center-block" style="max-width: 90%; height: auto;" src="https://i.gyazo.com/678b5e40a49c362c0bae654addb977a3.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3><strong>Notes</strong></h3>
+    <ul class="mb-4">
+      <li>A claim generally consists of one or two sentences.</li>
+      <li>A debater might state serveral claims in a counter-argument. In that case, please mark all claims.</li>
+      <li>If there is a sentence that only denies the opponent's claim, the sentence states the reason for the denial is also included in a claim.</li>
+        <ul>
+          <li>E.g)<font color="mediumorchid"><b> However, it's not true. Because the students will be more foolish by abolishing homework."</b></font></li>
+        </ul>
+      <!-- <li>If there is the summary sentence in the end, for example "That's why ...", please annotate as <span style="background-color:rgba( 248, 203, 51, 0.5 )">Restatement</span>.</li>-->
+    </ul>
+
+    <h3><strong>Examples</strong></h3>
+    <h6><b>Original argument</b></h6>
+    <div class="pm-speech mb-3">
+      Hello everyone. Today’s topic is “Homework should be abolished”.
+      We have two points: The first point is “free time” and the second point is “decrease burden on teachers”.
+      I will explain the first point of “free time”.
+      We believe that if homework were to be abolished, we could have more free time.
+      As a result, we could do more of what we really wanted like club activities, hobbies, or playing with friends.
+      In my case, I go to tennis club after class until 5:00 pm and then I go to cram school until 8:00 pm.
+      After this full day, I arrive at my home around 8:40 pm to eat dinner and take a shower.
+      At nearly 10:00 pm I start my homework.
+      I have a lot of homework.
+      As a result, I go to bed late at night at nearly 1:00 am in the morning and I don’t have the opportunity to sleep for a long period of time.
+      It is not healthy.
+      Therefore, homework should be abolished.
+      Thank you.
+    </div>
+
+    <div class="mb-3">
+      <span style="background-color:rgba( 0, 102, 255, 0.25 )">Value</span>: something is good or bad, important or not important<br>
+      <span style="background-color:rgba( 223, 51, 78, 0.3 )">Fact</span>: something is true or false<br>
+      <span style="background-color:rgba( 51, 204, 102, 0.3 )">Policy</span>: some action should or should not be taken<br>
+      <span style="background-color:rgba( 248, 203, 51, 0.5 )">Restatement</span>: paraphrase of a original claim<br>
+    </div>
+
+    <h6><b>Counter-argument 1</b></h6>
+    <div class="pm-speech mb-4">
+      They said that students will have more free time by abolishing homework.
+      <span style="background-color:rgba( 223, 51, 78, 0.3 )">However, what students will do during free time is just playing games and chatting using SNS in most cases or just sleeping as they said.</span>
+      It is because human is lazy in nature.
+      Doing hard thing is usually difficult.
+      Then, many students will not study at home.
+      Of course, some students maybe study what they want to learn, however, the problem is for those kids who can’t study by themselves.
+      Imagine, elementary school students, they don’t know what study is important and how to do that.
+      <span style="background-color:rgba( 0, 102, 255, 0.25 )">Then, some instructions such as homework is very important.</span>
+      Some of you may think homework is worthless, but giving homework meaning giving the opportunity to study is much more meaningful than do nothing or doing addictive games.
+      That's why free time by abolishing homework is rather harmful to students.
+    </div>
+
+    <h6><b>Counter-argument 2</b></h6>
+    <div class="pm-speech mb-3">
+      They said that by abolishing homework, we can enjoy more free time.
+      <span style="background-color:rgba( 51, 204, 102, 0.3 )">However, it's not true. Even if enjoying free more time is necessary, we can do so by alternative way such as using out time more efficiently.</span>
+      Because we can reduce time taken to do homework.
+      For example, we can use the break between classes or time before homeroom.
+      Moreover, we can do homework with friends during playing with them.
+      That's why abolishing homework isn't necessary requirement to create free time.
+    </div>
+
+    <h5>Thank you for working hard on this task!</h5>
+
+    <!-- 以下 タスク画面 -->
+    <hr style="height:1px;" class="mt-4 mb-5">
+    <div>
+      <h4><b>Topic: </b>${topic}</h4>
+    </div>
+    <h5><b>Original argument</b></h5>
+    <div class="pm-speech">
+      ${pm_speech}
+    </div>
+    <h5><b>Counter-argument</b></h5>
+    <!-- テーブル作成 ID, Speaker, Speech-->
+    <table border="1" style="width: 100%;" id="table_lo">
+      <tbody>
+        <!-- row1 -->
+        <tr>
+          <td align="center" style="width: 5%;; background-color: rgb(0, 0, 0);"> <span style="color: rgb(255, 255, 255);">ID</span> </td>
+          <td align="center" style="width: 10%; background-color: rgb(0, 0, 0);"> <span style="color: rgb(255, 255, 255);">Speech</span> </td>
+          <td align="center" style="width: 85%; background-color: rgb(0, 0, 0);"> <span style="color: rgb(255, 255, 255);">Restatement Source</span> </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ClaimType選択 3つのボタン -->
+    <div class="mt-3 mb-2">
+      <button type="button" id="btn-claim-value" style="width:150px" class="btn-lg btn-sentence-claim-value mb-1">Claim-Value</button>
+      <nobr><span class="h5"> : something is good or bad, important or not important</span></nobr><br>
+      <button type="button" id="btn-claim-fact" style="width:150px" class="btn-lg btn-sentence-claim-fact mb-1">Claim-Fact</button>
+      <nobr><span class="h5"> : something is true or false.</span></nobr><br>
+      <button type="button" id="btn-claim-policy" style="width:150px" class="btn-lg btn-sentence-claim-policy mb-1">Claim-Policy</button>
+      <nobr><span class="h5"> : some action should or should not be taken</span></nobr><br>
+      <button type="button" id="btn-restatement" style="width:150px" class="btn-lg btn-sentence-restatement mb-1">Restatement</button>
+      <nobr><span class="h5"> : paraphrase of a original claim</span></nobr>
+    </div>
+
+    <!-- 'Clear', 'All Clear' の2つのボタン -->
+    <div style="padding:5px 0 20px 0">
+      <button type="button" id="btn-clear" class="btn-lg btn-secondary">Clear</button>
+      <button type="button" id="btn-all-clear" class="btn-lg btn-secondary">All Clear</button>
+    </div>
+    <div>
+      Any constructive feedback on this HIT is much welcome (optional)<br>
+      <textarea id="feedback" name="feedback" style="width: 70%" rows="3"></textarea>
+    </div>
+    <div style="padding:20px 0 0 0">
+      <div>
+        <textarea name="Claim Value ID:" style="display:none;" class="uid-claim-value-text-area"></textarea>
+        <textarea name="Claim Fact ID:" style="display:none;" class="uid-claim-fact-text-area"></textarea>
+        <textarea name="Claim Policy ID:" style="display:none;" class="uid-claim-policy-text-area"></textarea>
+        <textarea name="Restatement ID:" style="display:none;" class="uid-restatement-text-area"></textarea>
+      </div>
+    </div>
+    <div>
+      <h4>
+        <font color="red">We manually check each response and we will reject work if we notice anyone is trying to exploit the system, such as answer that clearly do not follow the instructions, etc.</font></b></h5>
+      </h4>
+    </div>
+    <div id='lo_sentences' style='display:none'>${lo_sentences}</div>
+    <div id='they_sentences' style='display:none'>${they_sentences}</div>
+    <hr>
+  </div>
+</crowd-form>
+<style type="text/css">
+  .pm-speech{
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px
+  dashed #333333;
+  width:100%;
+  }
+  .btn-sentence{
+  display: inline-block;
+  padding: 5px 5px;
+  border: solid 1px #FFFFFF;
+  border-radius: 3px;
+  color: #333;
+  background: #FFFFFF;
+  text-decoration: none;
+  font-weight: normal;
+  font-family: Helvetica, Arial, sans-serif;
+  width: 100%;
+  text-align: left;
+  }
+  /*.label-sentence{
+  padding: 7px 5px;
+  border-radius: 3px;
+  color: #333;
+  background: #FFFFFF;
+  text-decoration: none;
+  font-weight: normal;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: left;
+  } */
+  .btn-sentence:hover{
+  color: #FFFFFF;
+  background: #CCCCCC;
+  }
+  .btn-sentence-selected{
+  color: #FFFFFF;
+  background: #BBBBBB !important;
+  }
+  .btn-sentence-claim-value{
+  color: #FFFFFF;
+  background: #3169B3;
+  }
+  .btn-sentence-claim-fact{
+  color: #FFFFFF;
+  background: #cd5c5c;
+  }
+  .btn-sentence-claim-policy{
+  color: #FFFFFF;
+  background: #6CBB5A;
+  }
+  .btn-sentence-restatement{
+  color: #FFFFFF;
+  background: #F8960C;
+  }
+</style>
+
+<script type="text/javascript">
+  // 準備：LOスピーチを画面上に準備する．
+  // １文単位でfor loop テーブルに出力
+  $(function(){
+    utterances = $('#lo_sentences').text().split('\n');
+    utterances.forEach(function (value, index, array) {
+      $('#table_lo').append(
+        '<tr>' +
+          '<td align="center" style="width: 5%;">' +
+            index +
+          '</td>' +
+          '<td align="center" style="width: 80.0000%;">' +
+            '<button type="button" id="display_u'+index+'" class="btn-large btn-sentence">' +
+              value +
+            '</button>' +
+          '</td>' +
+          '<td>' +
+            '<select id="reference_'+index+'" name="restatement source('+index+')" style="width:100%; display:none;">' +
+              '<option disabled selected value> -- select an ID -- </option>' +
+            '</select>' +
+          '</td>' +
+        '</tr>');
+    })
+
+    const utterances_length = utterances.length;
+
+    they_said_sentences = $('#they_sentences').text().split('\n');
+    for(i = 0; i < they_said_sentences.length; i++){
+      $('#display_u'+i).prop('disabled',true);
+    }
+
+    // --- 以下処理内容 ---
+    $('[id^=display]').click(function(){
+      $(this).toggleClass('btn-sentence-selected');
+    })
+
+    function remove_utterance_from_text_area(text_area_name, utterance_id){
+      text_area_value = $(text_area_name).val();
+      if(text_area_value){
+        utterance_ids = text_area_value.split('\n');
+        for(i = 0; i < utterance_ids.length; i++){
+          if(utterance_ids[i] == utterance_id){
+            utterance_ids.splice(i, 1);
+          };
+        };
+        $(text_area_name).val(utterance_ids.join('\n'));
+      };
+    }
+
+    function remove_utterance_from_all_text_area(utterance_id){
+      remove_utterance_from_text_area('.uid-claim-value-text-area', utterance_id);
+      remove_utterance_from_text_area('.uid-claim-fact-text-area', utterance_id);
+      remove_utterance_from_text_area('.uid-claim-policy-text-area', utterance_id);
+      remove_utterance_from_text_area('.uid-restatement-text-area', utterance_id)
+    }
+
+    function remove_all_utterances(){
+      $('.uid-claim-value-text-area').val('');
+      $('.uid-claim-fact-text-area').val('');
+      $('.uid-claim-policy-text-area').val('');
+      $('.uid-restatement-text-area').val('');
+    }
+
+    function add_utterance_id(claim_type){
+      text_area_value = $(".uid-"+claim_type+"-text-area").val('');
+      type_array = [claim_type]
+      utterance_ids_array = get_utterances_ids(type_array);
+      $(".uid-"+claim_type+"-text-area").val(utterance_ids_array.join('\n'));
+    }
+
+    function get_utterances_ids(type_array){
+      // type_array = ['claim-value', 'claim-fact', 'claim-policy', 'restatement']
+      utterance_ids_array = [];
+      for (let idx in type_array){
+        cs = document.getElementsByClassName('btn-sentence btn-sentence-'+type_array[idx]);
+        for (var i=0; i< cs.length;i++){
+          idd = cs[i].getAttribute("id");
+          utterance_id = extract_utterance_id(idd);
+          utterance_ids_array.push(utterance_id);
+        };
+      };
+      utterance_ids_array.sort();
+      return utterance_ids_array;
+    }
+
+    function clear_selected_state(index, element){
+      $(element).removeClass(function (index, className) {
+        return (className.match (/(^|\s)btn-sentence-\S+/g) || []).join(' ');
+      });
+    }
+
+    function extract_utterance_id(btn_id){
+      return btn_id.match(/.+_u(.+)/)[1];
+    }
+
+    function clear_drop_down_btn(utterances_length){
+      for (let i=0; i<utterances_length; i++){
+        $('#reference_'+i).prop('required',false);
+        $('select#reference_'+i+' option').remove();
+        $('#reference_'+i).append($('<option disabled selected value>').html(' -- select an ID -- '));
+      };
+    }
+
+    function add_or_clear_drop_down_option(utterances_length, index){
+      for (let i=0; i<utterances_length; i++){
+        if($("#display_u"+i).hasClass("btn-sentence-restatement")){
+          $('#reference_'+i).prop('required',true);
+          $('#reference_'+i).append($('<option>').html('ID : '+index));
+        }
+        else{
+          $('#reference_'+i).prop('required',false);
+          $('select#reference_'+i+' option').remove();
+          $('#reference_'+i).append($('<option disabled selected value>').html(' -- select an ID -- '));
+        };
+      };
+      $('#reference_'+index).hide();
+    }
+
+    function check_number_of_claim(max_number=3){
+      var x = 0;
+      var y = 0;
+      var z = 0;
+      $('[id^=display_u]').each(function(index, element){
+        if($(this).hasClass('btn-sentence-selected') && ($(this).hasClass('btn-sentence-claim-value') || $(this).hasClass('btn-sentence-claim-value') || $(this).hasClass('btn-sentence-claim-policy'))){
+          x += 1
+          //console.log("x");
+        }
+        else if ($(this).hasClass('btn-sentence-selected')) {
+          y += 1
+          //console.log('y');
+        }
+        else if ($(this).hasClass('btn-sentence-claim-value') || $(this).hasClass('btn-sentence-claim-fact') || $(this).hasClass('btn-sentence-claim-policy')){
+          z += 1
+          //console.log('z');
+        }
+      });
+      sum = x + y + z;
+      return sum <= max_number
+    }
+
+    // --- 以下ボタン押した時の処理 ---
+    // claim-value btn
+    $('[id^=btn-claim-value]').click(function(){
+      if(check_number_of_claim()){
+        $("[id^=display_u]").each(function(index, element){
+          if($(this).hasClass("btn-sentence-selected")){
+            utterance_id = extract_utterance_id($(this).attr("id"));
+            clear_selected_state(index, element);
+            $(element).addClass('btn-sentence-claim-value');
+            remove_utterance_from_all_text_area(utterance_id);
+            add_or_clear_drop_down_option(utterances_length, index);
+            add_utterance_id('claim-value');
+          };
+        });
+      }else {
+        alert("Can't select more than 3 claims.");
+      };
+    })
+
+    // claim-fact btn
+    $('[id^=btn-claim-fact]').click(function(){
+      if(check_number_of_claim()){
+        $("[id^=display_u]").each(function(index, element){
+          if($(this).hasClass("btn-sentence-selected")){
+            utterance_id = extract_utterance_id($(this).attr("id"));
+            clear_selected_state(index, element);
+            $(element).addClass('btn-sentence-claim-fact');
+            remove_utterance_from_all_text_area(utterance_id);
+            add_or_clear_drop_down_option(utterances_length, index);
+            add_utterance_id('claim-fact');
+          };
+        });
+      }else {
+        alert("Can't select more than 3 claims.");
+      };
+    })
+
+    // claim-policy btn
+    $('[id^=btn-claim-policy]').click(function(){
+      if(check_number_of_claim()){
+        $("[id^=display_u]").each(function(index, element){
+          if($(this).hasClass("btn-sentence-selected")){
+            utterance_id = extract_utterance_id($(this).attr("id"));
+            clear_selected_state(index, element);
+            $(element).addClass('btn-sentence-claim-policy');
+            remove_utterance_from_all_text_area(utterance_id);
+            add_or_clear_drop_down_option(utterances_length, index);
+            add_utterance_id('claim-policy');
+          };
+        });
+      }else {
+        alert("Can't select more than 3 claims.");
+      };
+    })
+
+    // restatement btn
+    $('[id^=btn-restatement]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
+        if($(this).hasClass("btn-sentence-selected")){
+          utterance_id = extract_utterance_id($(this).attr("id"));
+          clear_selected_state(index, element);
+          $(element).addClass('btn-sentence-restatement');
+          remove_utterance_from_all_text_area(utterance_id);
+          add_utterance_id('restatement');
+          // リステイトメント先プルダウン表示, 要素追加
+          $('#reference_'+index).prop('required',true);
+          $('#reference_'+index).show();
+          type_array = ['claim-value', 'claim-fact', 'claim-policy'];
+          utterance_ids_array = get_utterances_ids(type_array);
+          for (let i in utterance_ids_array){
+            $('#reference_'+index).append($('<option>').html('ID : '+utterance_ids_array[i]));
+          };
+        };
+      });
+    })
+
+    // clear btn
+    $('[id^=btn-clear]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
+        if($(this).hasClass("btn-sentence-selected")){
+          utterance_id = extract_utterance_id($(this).attr("id"));
+          clear_selected_state(index, element);
+          // リステイトメント先プルダウン非表示
+          $('#reference_'+index).hide();
+          clear_drop_down_btn(utterances_length);
+          remove_utterance_from_all_text_area(utterance_id);
+        };
+      });
+    })
+
+    // all-clear btn
+    $('[id^=btn-all-clear]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
+        utterance_id = extract_utterance_id($(this).attr("id"));
+        clear_selected_state(index, element);
+        // リステイトメント先プルダウン非表示
+        $('#reference_'+index).hide();
+        clear_drop_down_btn(utterances_length);
+        remove_all_utterances();
+      });
+    })
+
+    // 提出時のエラー
+    document.querySelector('crowd-form').onsubmit = function(e ) {
+      claim_value_text = $('.uid-claim-value-text-area').val();
+      claim_fact_text = $('.uid-claim-fact-text-area').val();
+      claim_policy_text = $('.uid-claim-policy-text-area').val();
+      if (claim_value_text=="" && claim_fact_text=="" && claim_policy_text==""){
+        console.log('test error');
+        alert("Please select a claim at least one.")
+        e.preventDefault();
+      };
+    }
+  })
+</script>
