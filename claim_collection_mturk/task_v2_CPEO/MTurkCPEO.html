@@ -12,6 +12,7 @@
 
 <crowd-form answer-format="flatten-objects">
   <div class="container-fluid">
+    <!--
     <h3><strong>Overview</strong></h3>
     <p>
       Thank you for taking the time to help us!<br/> In this task, you will be presented with arguments from a series of debates. For the argument, we would like for you to identify claims made by the debater and mark them.
@@ -148,7 +149,7 @@
         <ul>
           <li>E.g)<font color="mediumorchid"><b> However, it's not true. Because the students will be more foolish by abolishing homework."</b></font></li>
         </ul>
-      <!-- <li>If there is the summary sentence in the end, for example "That's why ...", please annotate as <span style="background-color:rgba( 248, 203, 51, 0.5 )">Restatement</span>.</li>-->
+       <li>If there is the summary sentence in the end, for example "That's why ...", please annotate as <span style="background-color:rgba( 248, 203, 51, 0.5 )">Restatement</span>.</li>
     </ul>
 
     <h3><strong>Examples</strong></h3>
@@ -201,7 +202,7 @@
     </div>
 
     <h5>Thank you for working hard on this task!</h5>
-
+  -->
     <!-- 以下 タスク画面 -->
     <hr style="height:1px;" class="mt-4 mb-5">
     <div>
@@ -219,21 +220,21 @@
         <tr>
           <td align="center" style="width: 5%;; background-color: rgb(0, 0, 0);"> <span style="color: rgb(255, 255, 255);">ID</span> </td>
           <td align="center" style="width: 10%; background-color: rgb(0, 0, 0);"> <span style="color: rgb(255, 255, 255);">Speech</span> </td>
-          <td align="center" style="width: 85%; background-color: rgb(0, 0, 0);"> <span style="color: rgb(255, 255, 255);">Restatement Source</span> </td>
+          <td align="center" style="width: 85%; background-color: rgb(0, 0, 0);"> <span style="color: rgb(255, 255, 255);">Claim ID</span> </td>
         </tr>
       </tbody>
     </table>
 
     <!-- ClaimType選択 3つのボタン -->
     <div class="mt-3 mb-2">
-      <button type="button" id="btn-claim-value" style="width:150px" class="btn-lg btn-sentence-claim-value mb-1">Claim-Value</button>
-      <nobr><span class="h5"> : something is good or bad, important or not important</span></nobr><br>
-      <button type="button" id="btn-claim-fact" style="width:150px" class="btn-lg btn-sentence-claim-fact mb-1">Claim-Fact</button>
-      <nobr><span class="h5"> : something is true or false.</span></nobr><br>
-      <button type="button" id="btn-claim-policy" style="width:150px" class="btn-lg btn-sentence-claim-policy mb-1">Claim-Policy</button>
-      <nobr><span class="h5"> : some action should or should not be taken</span></nobr><br>
-      <button type="button" id="btn-restatement" style="width:150px" class="btn-lg btn-sentence-restatement mb-1">Restatement</button>
-      <nobr><span class="h5"> : paraphrase of a original claim</span></nobr>
+      <button type="button" id="btn-claim" style="width:150px" class="btn-lg btn-sentence-claim mb-1">Claim</button>
+      <nobr><span class="h5"> : central reason given in support of the debater's stance</span></nobr><br>
+      <button type="button" id="btn-premise" style="width:150px" class="btn-lg btn-sentence-premise mb-1">Premise</button>
+      <nobr><span class="h5"> : additional reasons that underpin the plausibility of the claim</span></nobr><br>
+      <button type="button" id="btn-example" style="width:150px" class="btn-lg btn-sentence-example mb-1">Example</button>
+      <nobr><span class="h5"> : additional example thath underpin the plausibility of the claim</span></nobr><br>
+      <button type="button" id="btn-other" style="width:150px" class="btn-lg btn-sentence-other mb-1">Other</button>
+      <nobr><span class="h5"> : other than the above</span></nobr>
     </div>
 
     <!-- 'Clear', 'All Clear' の2つのボタン -->
@@ -247,10 +248,10 @@
     </div>
     <div style="padding:20px 0 0 0">
       <div>
-        <textarea name="Claim Value ID:" style="display:none;" class="uid-claim-value-text-area"></textarea>
-        <textarea name="Claim Fact ID:" style="display:none;" class="uid-claim-fact-text-area"></textarea>
-        <textarea name="Claim Policy ID:" style="display:none;" class="uid-claim-policy-text-area"></textarea>
-        <textarea name="Restatement ID:" style="display:none;" class="uid-restatement-text-area"></textarea>
+        <textarea name="Claim ID:" style="display:none;" class="uid-claim-text-area"></textarea>
+        <textarea name="Premise ID:" style="display:none;" class="uid-premise-text-area"></textarea>
+        <textarea name="Example ID:" style="display:none;" class="uid-example-text-area"></textarea>
+        <textarea name="Other ID:" style="display:none;" class="uid-other-text-area"></textarea>
       </div>
     </div>
     <div>
@@ -302,19 +303,19 @@
   color: #FFFFFF;
   background: #BBBBBB !important;
   }
-  .btn-sentence-claim-value{
+  .btn-sentence-claim{
   color: #FFFFFF;
   background: #3169B3;
   }
-  .btn-sentence-claim-fact{
+  .btn-sentence-premise{
   color: #FFFFFF;
   background: #cd5c5c;
   }
-  .btn-sentence-claim-policy{
+  .btn-sentence-example{
   color: #FFFFFF;
   background: #6CBB5A;
   }
-  .btn-sentence-restatement{
+  .btn-sentence-other{
   color: #FFFFFF;
   background: #F8960C;
   }
@@ -337,7 +338,7 @@
             '</button>' +
           '</td>' +
           '<td>' +
-            '<select id="reference_'+index+'" name="restatement source('+index+')" style="width:100%; display:none;">' +
+            '<select id="reference_'+index+'" name="reference_'+index+'" style="width:100%; display:none;">' +
               '<option disabled selected value> -- select an ID -- </option>' +
             '</select>' +
           '</td>' +
@@ -370,24 +371,24 @@
     }
 
     function remove_utterance_from_all_text_area(utterance_id){
-      remove_utterance_from_text_area('.uid-claim-value-text-area', utterance_id);
-      remove_utterance_from_text_area('.uid-claim-fact-text-area', utterance_id);
-      remove_utterance_from_text_area('.uid-claim-policy-text-area', utterance_id);
-      remove_utterance_from_text_area('.uid-restatement-text-area', utterance_id)
+      remove_utterance_from_text_area('.uid-claim-text-area', utterance_id);
+      remove_utterance_from_text_area('.uid-premise-text-area', utterance_id);
+      remove_utterance_from_text_area('.uid-example-text-area', utterance_id);
+      remove_utterance_from_text_area('.uid-other-text-area', utterance_id)
     }
 
     function remove_all_utterances(){
-      $('.uid-claim-value-text-area').val('');
-      $('.uid-claim-fact-text-area').val('');
-      $('.uid-claim-policy-text-area').val('');
-      $('.uid-restatement-text-area').val('');
+      $('.uid-claim-text-area').val('');
+      $('.uid-premise-text-area').val('');
+      $('.uid-example-text-area').val('');
+      $('.uid-other-text-area').val('');
     }
 
-    function add_utterance_id(claim_type){
-      text_area_value = $(".uid-"+claim_type+"-text-area").val('');
-      type_array = [claim_type]
+    function add_utterance_id(type){
+      text_area_value = $(".uid-"+type+"-text-area").val('');
+      type_array = [type]
       utterance_ids_array = get_utterances_ids(type_array);
-      $(".uid-"+claim_type+"-text-area").val(utterance_ids_array.join('\n'));
+      $(".uid-"+type+"-text-area").val(utterance_ids_array.join('\n'));
     }
 
     function get_utterances_ids(type_array){
@@ -425,9 +426,9 @@
 
     function add_or_clear_drop_down_option(utterances_length, index){
       for (let i=0; i<utterances_length; i++){
-        if($("#display_u"+i).hasClass("btn-sentence-restatement")){
+        if($("#display_u"+i).hasClass("btn-sentence-premise") || $("#display_u"+i).hasClass("btn-sentence-example")){
           $('#reference_'+i).prop('required',true);
-          $('#reference_'+i).append($('<option>').html('ID : '+index));
+          $('#reference_'+i).append($('<option>').html(index));
         }
         else{
           $('#reference_'+i).prop('required',false);
@@ -438,12 +439,13 @@
       $('#reference_'+index).hide();
     }
 
+
     function check_number_of_claim(max_number=3){
       var x = 0;
       var y = 0;
       var z = 0;
       $('[id^=display_u]').each(function(index, element){
-        if($(this).hasClass('btn-sentence-selected') && ($(this).hasClass('btn-sentence-claim-value') || $(this).hasClass('btn-sentence-claim-value') || $(this).hasClass('btn-sentence-claim-policy'))){
+        if($(this).hasClass('btn-sentence-selected') && ($(this).hasClass('btn-sentence-claim'))){
           x += 1
           //console.log("x");
         }
@@ -451,7 +453,7 @@
           y += 1
           //console.log('y');
         }
-        else if ($(this).hasClass('btn-sentence-claim-value') || $(this).hasClass('btn-sentence-claim-fact') || $(this).hasClass('btn-sentence-claim-policy')){
+        else if ($(this).hasClass('btn-sentence-claim')){
           z += 1
           //console.log('z');
         }
@@ -461,17 +463,17 @@
     }
 
     // --- 以下ボタン押した時の処理 ---
-    // claim-value btn
-    $('[id^=btn-claim-value]').click(function(){
+    // claim btn
+    $('[id^=btn-claim]').click(function(){
       if(check_number_of_claim()){
         $("[id^=display_u]").each(function(index, element){
           if($(this).hasClass("btn-sentence-selected")){
             utterance_id = extract_utterance_id($(this).attr("id"));
             clear_selected_state(index, element);
-            $(element).addClass('btn-sentence-claim-value');
+            $(element).addClass('btn-sentence-claim');
             remove_utterance_from_all_text_area(utterance_id);
             add_or_clear_drop_down_option(utterances_length, index);
-            add_utterance_id('claim-value');
+            add_utterance_id('claim');
           };
         });
       }else {
@@ -479,59 +481,57 @@
       };
     })
 
-    // claim-fact btn
-    $('[id^=btn-claim-fact]').click(function(){
-      if(check_number_of_claim()){
-        $("[id^=display_u]").each(function(index, element){
-          if($(this).hasClass("btn-sentence-selected")){
-            utterance_id = extract_utterance_id($(this).attr("id"));
-            clear_selected_state(index, element);
-            $(element).addClass('btn-sentence-claim-fact');
-            remove_utterance_from_all_text_area(utterance_id);
-            add_or_clear_drop_down_option(utterances_length, index);
-            add_utterance_id('claim-fact');
-          };
-        });
-      }else {
-        alert("Can't select more than 3 claims.");
-      };
-    })
-
-    // claim-policy btn
-    $('[id^=btn-claim-policy]').click(function(){
-      if(check_number_of_claim()){
-        $("[id^=display_u]").each(function(index, element){
-          if($(this).hasClass("btn-sentence-selected")){
-            utterance_id = extract_utterance_id($(this).attr("id"));
-            clear_selected_state(index, element);
-            $(element).addClass('btn-sentence-claim-policy');
-            remove_utterance_from_all_text_area(utterance_id);
-            add_or_clear_drop_down_option(utterances_length, index);
-            add_utterance_id('claim-policy');
-          };
-        });
-      }else {
-        alert("Can't select more than 3 claims.");
-      };
-    })
-
-    // restatement btn
-    $('[id^=btn-restatement]').click(function(){
+    // premise btn
+    $('[id^=btn-premise]').click(function(){
       $("[id^=display_u]").each(function(index, element){
         if($(this).hasClass("btn-sentence-selected")){
           utterance_id = extract_utterance_id($(this).attr("id"));
           clear_selected_state(index, element);
-          $(element).addClass('btn-sentence-restatement');
+          $(element).addClass('btn-sentence-premise');
           remove_utterance_from_all_text_area(utterance_id);
-          add_utterance_id('restatement');
+          add_utterance_id('premise');
           // リステイトメント先プルダウン表示, 要素追加
           $('#reference_'+index).prop('required',true);
           $('#reference_'+index).show();
-          type_array = ['claim-value', 'claim-fact', 'claim-policy'];
+          type_array = ['claim'];
           utterance_ids_array = get_utterances_ids(type_array);
           for (let i in utterance_ids_array){
-            $('#reference_'+index).append($('<option>').html('ID : '+utterance_ids_array[i]));
+            $('#reference_'+index).append($('<option>').html(utterance_ids_array[i]));
           };
+        };
+      });
+    })
+
+    // example btn
+    $('[id^=btn-example]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
+        if($(this).hasClass("btn-sentence-selected")){
+          utterance_id = extract_utterance_id($(this).attr("id"));
+          clear_selected_state(index, element);
+          $(element).addClass('btn-sentence-example');
+          remove_utterance_from_all_text_area(utterance_id);
+          add_utterance_id('example');
+          // リステイトメント先プルダウン表示, 要素追加
+          $('#reference_'+index).prop('required',true);
+          $('#reference_'+index).show();
+          type_array = ['claim'];
+          utterance_ids_array = get_utterances_ids(type_array);
+          for (let i in utterance_ids_array){
+            $('#reference_'+index).append($('<option>').html(+utterance_ids_array[i]));
+          };
+        };
+      });
+    })
+
+    // other btn
+    $('[id^=btn-other]').click(function(){
+      $("[id^=display_u]").each(function(index, element){
+        if($(this).hasClass("btn-sentence-selected")){
+          utterance_id = extract_utterance_id($(this).attr("id"));
+          clear_selected_state(index, element);
+          $(element).addClass('btn-sentence-other');
+          remove_utterance_from_all_text_area(utterance_id);
+          add_utterance_id('other');
         };
       });
     })
@@ -564,12 +564,13 @@
 
     // 提出時のエラー
     document.querySelector('crowd-form').onsubmit = function(e ) {
-      claim_value_text = $('.uid-claim-value-text-area').val();
-      claim_fact_text = $('.uid-claim-fact-text-area').val();
-      claim_policy_text = $('.uid-claim-policy-text-area').val();
-      if (claim_value_text=="" && claim_fact_text=="" && claim_policy_text==""){
+      claim_text = $('.uid-claim-text-area').val();
+      premise_text = $('.uid-premise-text-area').val();
+      example_text = $('.uid-example-text-area').val();
+      other_text = $('.uid-other-text-area').val();
+      if (claim_text=="" && premise_text=="" && example_text=="" && other_text==""){
         console.log('test error');
-        alert("Please select a claim at least one.")
+        alert("Please select type at least one.")
         e.preventDefault();
       };
     }
