@@ -570,9 +570,19 @@
       premise_text = $('.uid-premise-text-area').val();
       example_text = $('.uid-example-text-area').val();
       other_text = $('.uid-other-text-area').val();
+
+      claim_text_len = claim_text.split('\n').length;
+      premise_text_len = premise_text.split('\n').length;
+      example_text_len = example_text.split('\n').length;
+      other_text_len = other_text.split('\n').length;
+
       if (claim_text=="" && premise_text=="" && example_text=="" && other_text==""){
         console.log('test error');
         alert("Please select type at least one.")
+        e.preventDefault();
+      }else if (claim_text_len + premise_text_len + example_text_len + other_text_len + they_said_sentences.length != utterances_length) {
+        console.log('test error2');
+        alert("Please select all setnence.")
         e.preventDefault();
       };
     }
